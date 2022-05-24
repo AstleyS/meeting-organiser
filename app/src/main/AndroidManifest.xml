@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MeetingOrganiser">
         <activity
+            android:name=".view.host.CreateMeetingActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.host.HostHomepageActivity"
             android:exported="false" />
         <activity
