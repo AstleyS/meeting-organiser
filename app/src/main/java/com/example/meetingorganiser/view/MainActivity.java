@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickHost(View view) {
         startActivity(new Intent(this, HostHomepageActivity.class));
         Log.i(TAG, "Going to Host Homepage");
-        // finish();
+        finish();
     }
 
     public void onClickParticipant(View view) {
