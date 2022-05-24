@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.view.host.HostHomepageActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickHost(View view) {
-        //startActivity(new Intent(this, HostHomepageActivity.class));
+        startActivity(new Intent(this, HostHomepageActivity.class));
         //Log.i(TAG, "Going to Host Homepage");
         // finish();
     }
