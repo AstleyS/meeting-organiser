@@ -93,16 +93,33 @@
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_meeting"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="24dp"
-        android:src="@drawable/ic_check"
-        android:onClick="onClickCreateMeeting"
-        android:tooltipText="Add meeting" />
+        android:layout_marginTop="30dp"
+        android:layout_gravity="right">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="24dp"
+            android:onClick="onClickCancel"
+            android:backgroundTint="#FF0000"
+            android:src="@drawable/ic_cancel"
+            android:tooltipText="Add meeting" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_meeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="24dp"
+            android:onClick="onClickCreateMeeting"
+            android:src="@drawable/ic_check"
+            android:tooltipText="Add meeting" />
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -38,8 +38,16 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
     }
 
+    public void onClickCancel(View view) {
+        Intent intent = new Intent(this, HostHomepageActivity.class);
+        startActivity(intent);
+        Log.i(TAG, "Going to HostHomepageActivity");
+        finish();
+    }
+
     public void onClickCreateMeeting(View view) {
         Intent intent = new Intent(this, HostHomepageActivity.class);
+        startActivity(intent);
         Log.i(TAG, "Going to HostHomepageActivity");
         finish();
     }
