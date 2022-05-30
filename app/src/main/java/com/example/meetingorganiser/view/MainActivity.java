@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.meetingorganiser.R;
 import com.example.meetingorganiser.view.host.HostHomepageActivity;
+import com.example.meetingorganiser.view.participant.ParticipantFormActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickParticipant(View view) {
-        //startActivity(new Intent(this, ParticipantHomepageActivity.class));
-        //Log.i(TAG, "Going to Participant Homepage");
-        // finish();
+        startActivity(new Intent(this, ParticipantFormActivity.class));
+        Log.i(TAG, "Going to Participant Form");
+        finish();
     }
 
 }

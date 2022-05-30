@@ -18,13 +18,13 @@ import java.util.List;
 
 public class HostHomepageActivity extends AppCompatActivity {
 
-    private final String TAG = "HostHomepageActivity";
-    private final String EXTRA_MEETINGS_LIST = "meetingsList";
+    //private final String TAG = "HostHomepageActivity";
+    //private final String EXTRA_MEETINGS_LIST = "meetingsList";
     private List<String> meetingsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "onCreated Invoked");
+        //Log.i(TAG, "onCreated Invoked");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host_homepage);
 
@@ -39,11 +39,11 @@ public class HostHomepageActivity extends AppCompatActivity {
     public void onClickCreateMeeting(View view) {
         Intent intent = new Intent(this, CreateMeetingActivity.class);
         startActivity(intent);
-        Log.i(TAG, "Going to Create Meeting Homepage");
+        //Log.i(TAG, "Going to Create Meeting Homepage");
 
-        if (meetingsList != null) {
-            System.out.println(meetingsList);
-            intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
-        }
+        //if (meetingsList != null) {
+          //  System.out.println(meetingsList);
+          //  intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
+        //}
     }
 }
