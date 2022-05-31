@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "onCreated Invoked");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.setTitle("Meeting Organiser");
     }
 
 

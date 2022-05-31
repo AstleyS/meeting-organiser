@@ -18,18 +18,24 @@ import java.util.List;
 
 public class HostHomepageActivity extends AppCompatActivity {
 
-    //private final String TAG = "HostHomepageActivity";
-    //private final String EXTRA_MEETINGS_LIST = "meetingsList";
+    private final String TAG = "HostHomepageActivity";
+    private final String EXTRA_MEETINGS_LIST = "meetingsList";
     private List<String> meetingsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Log.i(TAG, "onCreated Invoked");
+        Log.i(TAG, "onCreated Invoked");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host_homepage);
 
-        meetingsList = new ArrayList<>(Arrays.asList("M1", "M2", "M3"));
+        this.setTitle("Host Homepage");
+
+        meetingsList = (List<String>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
         System.out.println(meetingsList);
+
+        if (meetingsList == null) {
+            meetingsList = new ArrayList<>();
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_item, meetingsList);
         ListView listView = (ListView) findViewById(R.id.list_meetings);
@@ -38,12 +44,11 @@ public class HostHomepageActivity extends AppCompatActivity {
 
     public void onClickCreateMeeting(View view) {
         Intent intent = new Intent(this, CreateMeetingActivity.class);
-        startActivity(intent);
-        //Log.i(TAG, "Going to Create Meeting Homepage");
 
-        //if (meetingsList != null) {
-          //  System.out.println(meetingsList);
-          //  intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
-        //}
+        System.out.println(meetingsList);
+        intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
+
+        Log.i(TAG, "Going to Create Meeting Homepage");
+        startActivity(intent);
     }
 }

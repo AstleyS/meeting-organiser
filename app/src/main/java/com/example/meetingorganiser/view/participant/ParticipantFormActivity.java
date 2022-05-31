@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,11 +28,22 @@ public class ParticipantFormActivity extends AppCompatActivity {
     public static final int CAMERA_REQ_CODE = 102;
     private final String TAG = "ParticipantFormActivity";
 
+    EditText fname, lname, phone, email;
+    ImageView signature;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreated Invoked");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participant_form);
+
+        this.setTitle("Participant Form");
+
+        fname = (EditText) findViewById(R.id.participant_fname);
+        lname = (EditText) findViewById(R.id.participant_lname);
+        phone = (EditText) findViewById(R.id.participant_phone_number);
+        email = (EditText) findViewById(R.id.participant_email);
+        signature = (ImageView) findViewById(R.id.participant_signature);
     }
 
     public void onClickAddSignature(View view) {
@@ -49,16 +61,40 @@ public class ParticipantFormActivity extends AppCompatActivity {
     }
 
     public void onClickCreateParticipant(View view) {
-        /*
-        Intent intent = new Intent(this, HostHomepageActivity.class);
-        startActivity(intent);
-        Log.i(TAG, "Going to HostHomepageActivity");
-        finish();
-
-         */
+        if (validFields()) {
+            Intent intent = new Intent(this, ParticipantHomepageActivity.class);
+            startActivity(intent);
+            Log.i(TAG, "Going to ParticipantHomepageActivity");
+            finish();
+        }
     }
 
 
+    private boolean validFields() {
+        boolean error = false;
+
+        if (fname.length() == 0) {
+            fname.setError("This field is required");
+            error = true;
+        }
+        if (lname.length() == 0) {
+            lname.setError("This field is required");
+            error = true;
+        }
+        if (phone.length() == 0) {
+            phone.setError("This field is required");
+            error = true;
+        }
+        if (email.length() == 0) {
+            email.setError("This field is required");
+            error = true;
+        }
+        if (signature.getDrawable() == null) {
+            error = true;
+        }
+
+        return !error;
+    }
 
 
 

@@ -16,6 +16,7 @@ import android.widget.TimePicker;
 import com.example.meetingorganiser.R;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -26,30 +27,44 @@ public class CreateMeetingActivity extends AppCompatActivity {
     private final String EXTRA_MEETINGS_LIST = "meetingsList";
     private List<String> meetingsList;
 
+    EditText title, description, date, time;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreated Invoked");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_meeting);
 
-        meetingsList = (List<String>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
-        System.out.println(meetingsList);
+        title = (EditText) findViewById(R.id.meeting_title);
+        description = (EditText) findViewById(R.id.meeting_description);
+        date = (EditText) findViewById(R.id.meeting_date);
+        time = (EditText) findViewById(R.id.meeting_time);
 
+        meetingsList = (List<String>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
+        System.out.println("List" + meetingsList);
+
+        this.setTitle("Create Meeting");
 
     }
 
     public void onClickCancel(View view) {
         Intent intent = new Intent(this, HostHomepageActivity.class);
-        startActivity(intent);
         Log.i(TAG, "Going to HostHomepageActivity");
+        startActivity(intent);
         finish();
     }
 
     public void onClickCreateMeeting(View view) {
-        Intent intent = new Intent(this, HostHomepageActivity.class);
-        startActivity(intent);
-        Log.i(TAG, "Going to HostHomepageActivity");
-        finish();
+        if (validFields()) {
+            Intent intent = new Intent(this, HostHomepageActivity.class);
+
+            meetingsList.add(title.getText().toString());
+            intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
+
+            Log.i(TAG, "Going to HostHomepageActivity");
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void onClickDate(View view) {
@@ -104,4 +119,28 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
         timePickerDialog.show();
     }
+
+    private boolean validFields() {
+        boolean error = false;
+
+        if (title.length() == 0) {
+            title.setError("This field is required");
+            error = true;
+        }
+        if (description.length() == 0) {
+            description.setError("This field is required");
+            error = true;
+        }
+        if (date.length() == 0) {
+            date.setError("This field is required");
+            error = true;
+        }
+        if (time.length() == 0) {
+            time.setError("This field is required");
+            error = true;
+        }
+
+        return !error;
+    }
+
 }
