@@ -1,18 +1,21 @@
 package com.example.meetingorganiser.data.entities;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Meeting {
+public class Meeting implements Serializable {
 
     public int id;
 
     public int hostID;
 
+    public String title;
+
     public String description;
 
-    public Calendar date;
+    public String date;
 
-    public Calendar time;
+    public String time;
 
     public String qrCode;
 
@@ -24,9 +27,14 @@ public class Meeting {
     public String typeFeedback;
      */
 
-    public Meeting(int hostID, String description) {
+    public Meeting(int hostID, String title, String description, String date, String time) {
         this.hostID = hostID;
+        this.title = title;
         this.description = description;
+        this.date = date;
+        this.time = time;
+
+
     }
 
 }

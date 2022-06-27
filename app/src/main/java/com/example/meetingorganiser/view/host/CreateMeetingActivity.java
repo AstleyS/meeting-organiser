@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.data.entities.Meeting;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
     private final String TAG = "CreateMeetingActivity";
     private final String EXTRA_MEETINGS_LIST = "meetingsList";
-    private List<String> meetingsList;
+    private List<Meeting> meetingsList;
 
     EditText title, description, date, time;
 
@@ -40,7 +41,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
         date = (EditText) findViewById(R.id.meeting_date);
         time = (EditText) findViewById(R.id.meeting_time);
 
-        meetingsList = (List<String>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
+        meetingsList = (List<Meeting>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
         System.out.println("List" + meetingsList);
 
         this.setTitle("Create Meeting");
@@ -58,7 +59,9 @@ public class CreateMeetingActivity extends AppCompatActivity {
         if (validFields()) {
             Intent intent = new Intent(this, HostHomepageActivity.class);
 
-            meetingsList.add(title.getText().toString());
+            Meeting meeting = new Meeting(1, title.getText().toString().trim(),
+                                        description.getText().toString().trim(), date.getText().toString().trim(), time.getText().toString().trim());
+            meetingsList.add(meeting);
             intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
 
             Log.i(TAG, "Going to HostHomepageActivity");
@@ -123,19 +126,19 @@ public class CreateMeetingActivity extends AppCompatActivity {
     private boolean validFields() {
         boolean error = false;
 
-        if (title.length() == 0) {
+        if (title.getText().toString().trim().length() == 0) {
             title.setError("This field is required");
             error = true;
         }
-        if (description.length() == 0) {
+        if (description.getText().toString().trim().length() == 0) {
             description.setError("This field is required");
             error = true;
         }
-        if (date.length() == 0) {
+        if (date.getText().toString().trim().length() == 0) {
             date.setError("This field is required");
             error = true;
         }
-        if (time.length() == 0) {
+        if (time.getText().toString().trim().length() == 0) {
             time.setError("This field is required");
             error = true;
         }

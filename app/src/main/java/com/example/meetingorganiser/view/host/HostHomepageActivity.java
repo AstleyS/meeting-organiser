@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.data.entities.Meeting;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class HostHomepageActivity extends AppCompatActivity {
 
     private final String TAG = "HostHomepageActivity";
     private final String EXTRA_MEETINGS_LIST = "meetingsList";
-    private List<String> meetingsList;
+    private List<Meeting> meetingsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +31,14 @@ public class HostHomepageActivity extends AppCompatActivity {
 
         this.setTitle("Host Homepage");
 
-        meetingsList = (List<String>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
+        meetingsList = (List<Meeting>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
         System.out.println(meetingsList);
 
         if (meetingsList == null) {
             meetingsList = new ArrayList<>();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_item, meetingsList);
+        MeetingAdapter adapter = new MeetingAdapter(this, R.layout.list_item, meetingsList);
         ListView listView = (ListView) findViewById(R.id.list_meetings);
         listView.setAdapter(adapter);
     }
