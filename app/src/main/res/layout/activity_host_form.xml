@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:hint="First name here!"
+                android:text="Astley"
                 android:maxLength="25"/>
 
         </LinearLayout>
@@ -47,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:hint="Last name here!"
+                android:text="Santos"
                 android:maxLength="25"/>
 
         </LinearLayout>

@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Insert meeting title"
+        android:text="Meeting 1"
         android:maxLength="50" />
 
     <!-- Meeting Description -->
@@ -36,6 +37,7 @@
         android:inputType="text|textMultiLine"
         android:gravity="top"
         android:hint="Insert meeting description"
+        android:text="Meeting #1"
         android:maxLength="150"/>
 
     <!-- Meeting Date -->

@@ -33,15 +33,15 @@ public class HostHomepageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host_homepage);
 
-        this.setTitle("Host Homepage");
 
         meetingsList = (List<Meeting>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
-        //host = (List<Meeting>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
-        System.out.println(meetingsList);
+        if (meetingsList == null) meetingsList = new ArrayList<>();
 
-        if (meetingsList == null) {
-            meetingsList = new ArrayList<>();
-        }
+        host = (Host) getIntent().getSerializableExtra(EXTRA_HOST);
+        this.setTitle(host.firstName + "'s Homepage");
+
+        // System.out.println("oncreate list: " + meetingsList);
+        // System.out.println("oncreate host: " + host);
 
         MeetingAdapter adapter = new MeetingAdapter(this, R.layout.list_item, meetingsList);
         ListView listView = (ListView) findViewById(R.id.list_meetings);
@@ -51,8 +51,9 @@ public class HostHomepageActivity extends AppCompatActivity {
     public void onClickCreateMeeting(View view) {
         Intent intent = new Intent(this, CreateMeetingActivity.class);
 
-        System.out.println(meetingsList);
+        // System.out.println(meetingsList);
         intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
+        intent.putExtra(EXTRA_HOST, (Serializable) host);
 
         Log.i(TAG, "Going to Create Meeting Homepage");
         startActivity(intent);
