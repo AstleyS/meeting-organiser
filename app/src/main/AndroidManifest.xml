@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MeetingOrganiser">
         <activity
+            android:name=".view.host.MeetingDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.host.HostFormActivity"
             android:exported="false" />
         <activity

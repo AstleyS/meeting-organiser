@@ -2,10 +2,12 @@ package com.example.meetingorganiser.view.host;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -22,6 +24,7 @@ public class HostHomepageActivity extends AppCompatActivity {
 
     private final String TAG = "HostHomepageActivity";
     private final String EXTRA_MEETINGS_LIST = "meetingsList";
+    private final String EXTRA_MEETING = "meeting";
     private final String EXTRA_HOST = "host";
 
     private List<Meeting> meetingsList;
@@ -46,6 +49,21 @@ public class HostHomepageActivity extends AppCompatActivity {
         MeetingAdapter adapter = new MeetingAdapter(this, R.layout.list_item, meetingsList);
         ListView listView = (ListView) findViewById(R.id.list_meetings);
         listView.setAdapter(adapter);
+
+        Context context = this;
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Meeting meeting = adapter.getItem(i);
+                System.out.println(meeting.title);
+                Intent intent = new Intent(context, MeetingDetailsActivity.class);
+
+                intent.putExtra(EXTRA_MEETING, meeting);
+
+                Log.i(TAG, "Going to Meeting Details");
+                startActivity(intent);
+            }
+        });
     }
 
     public void onClickCreateMeeting(View view) {
