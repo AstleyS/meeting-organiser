@@ -1,6 +1,8 @@
 package com.example.meetingorganiser.data.entities;
 
-public class Host {
+import java.io.Serializable;
+
+public class Host implements Serializable {
 
     public int id;
 
@@ -12,11 +14,13 @@ public class Host {
 
     public String email;
 
-    public String profilePic;
 
-    public Host(String firstName, String lastName) {
+    public Host(String firstName, String lastName, String phoneNumber, String email) {
+        id = 1;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
 }

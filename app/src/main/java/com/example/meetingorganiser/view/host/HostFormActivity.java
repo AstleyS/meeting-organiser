@@ -1,12 +1,6 @@
 package com.example.meetingorganiser.view.host;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,11 +8,15 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.view.MainActivity;
+
+import java.io.Serializable;
 
 public class HostFormActivity extends AppCompatActivity {
 
     private final String TAG = "HostFormActivity";
+    private final String EXTRA_HOST = "host";
 
     EditText fname, lname, phone, email;
 
@@ -46,6 +44,12 @@ public class HostFormActivity extends AppCompatActivity {
     public void onClickCreateHost(View view) {
         if (validFields()) {
             Intent intent = new Intent(this, HostHomepageActivity.class);
+
+            Host host = new Host(fname.getText().toString().trim(), lname.getText().toString().trim(),
+                                phone.getText().toString().trim(), email.getText().toString().trim());
+
+            intent.putExtra(EXTRA_HOST, (Serializable) host);
+
             startActivity(intent);
             Log.i(TAG, "Going to HostHomepageActivity");
             finish();

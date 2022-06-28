@@ -5,6 +5,8 @@ import java.util.Calendar;
 
 public class Meeting implements Serializable {
 
+    static int currID = 0;
+
     public int id;
 
     public int hostID;
@@ -28,12 +30,12 @@ public class Meeting implements Serializable {
      */
 
     public Meeting(int hostID, String title, String description, String date, String time) {
+        id = ++currID;
         this.hostID = hostID;
         this.title = title;
         this.description = description;
         this.date = date;
         this.time = time;
-
 
     }
 

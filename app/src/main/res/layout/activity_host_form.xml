@@ -75,8 +75,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
-                android:hint="Phone number here!"
-                android:maxLength="15"/>
+                android:hint="e.g +352 611111111"
+                android:text="+352 611111111"
+                android:maxLength="20"/>
 
         </LinearLayout>
 
@@ -90,7 +91,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Email here!"
+                android:hint="e.g a@gmail.com"
+                android:text="a@gmail.com"
                 android:maxLength="25"/>
 
         </LinearLayout>

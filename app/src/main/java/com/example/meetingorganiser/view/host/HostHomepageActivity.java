@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.data.entities.Meeting;
 
 import java.io.Serializable;
@@ -21,7 +22,10 @@ public class HostHomepageActivity extends AppCompatActivity {
 
     private final String TAG = "HostHomepageActivity";
     private final String EXTRA_MEETINGS_LIST = "meetingsList";
+    private final String EXTRA_HOST = "host";
+
     private List<Meeting> meetingsList;
+    private Host host;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class HostHomepageActivity extends AppCompatActivity {
         this.setTitle("Host Homepage");
 
         meetingsList = (List<Meeting>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
+        //host = (List<Meeting>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
         System.out.println(meetingsList);
 
         if (meetingsList == null) {
