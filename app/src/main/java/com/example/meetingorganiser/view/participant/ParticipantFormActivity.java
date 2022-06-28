@@ -49,9 +49,7 @@ public class ParticipantFormActivity extends AppCompatActivity {
     public void onClickAddSignature(View view) {
         Log.i(TAG, " onClickAddSignature");
         askCameraPermission();
-
     }
-
 
     public void onClickCancel(View view) {
         Intent intent = new Intent(this, MainActivity.class);
@@ -69,41 +67,35 @@ public class ParticipantFormActivity extends AppCompatActivity {
         }
     }
 
-
     private boolean validFields() {
         boolean error = false;
 
-        if (fname.length() == 0) {
-            fname.setError("This field is required");
+        if (!fname.getText().toString().matches("[A-Za-z]+$")) {
+            fname.setError("This field required or not correctly filled");
             error = true;
         }
-        if (lname.length() == 0) {
-            lname.setError("This field is required");
+
+        if (!lname.getText().toString().matches("[A-Za-z]+$")) {
+            lname.setError("This field required or not correctly filled");
             error = true;
         }
-        if (phone.length() == 0) {
-            phone.setError("This field is required");
+
+        if (!phone.getText().toString().matches("^[+][(]?[0-9]{1,4}[)]?[-\\s\\./0-9]*$")) {
+            phone.setError("This field required or not correctly filled");
             error = true;
         }
-        if (email.length() == 0) {
-            email.setError("This field is required");
+
+        if (!email.getText().toString().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            email.setError("This field required or not correctly filled");
             error = true;
         }
+
         if (signature.getDrawable() == null) {
             error = true;
         }
 
         return !error;
     }
-
-
-
-
-
-
-
-
-
 
     private void askCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

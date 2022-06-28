@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.view.host.HostFormActivity;
 import com.example.meetingorganiser.view.host.HostHomepageActivity;
 import com.example.meetingorganiser.view.participant.ParticipantFormActivity;
 
@@ -26,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickHost(View view) {
-        startActivity(new Intent(this, HostHomepageActivity.class));
-        Log.i(TAG, "Going to Host Homepage");
+        startActivity(new Intent(this, HostFormActivity.class));
+        Log.i(TAG, "Going to Host Form");
         finish();
     }
 
