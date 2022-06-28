@@ -43,7 +43,7 @@ public class HostHomepageActivity extends AppCompatActivity {
         host = (Host) getIntent().getSerializableExtra(EXTRA_HOST);
         this.setTitle(host.firstName + "'s Homepage");
 
-        // System.out.println("oncreate list: " + meetingsList);
+        System.out.println("oncreate list: " + meetingsList);
         // System.out.println("oncreate host: " + host);
 
         MeetingAdapter adapter = new MeetingAdapter(this, R.layout.list_item, meetingsList);
@@ -55,10 +55,11 @@ public class HostHomepageActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Meeting meeting = adapter.getItem(i);
-                System.out.println(meeting.title);
                 Intent intent = new Intent(context, MeetingDetailsActivity.class);
 
+                intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
                 intent.putExtra(EXTRA_MEETING, meeting);
+                intent.putExtra(EXTRA_HOST, host);
 
                 Log.i(TAG, "Going to Meeting Details");
                 startActivity(intent);
@@ -71,7 +72,7 @@ public class HostHomepageActivity extends AppCompatActivity {
 
         // System.out.println(meetingsList);
         intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
-        intent.putExtra(EXTRA_HOST, (Serializable) host);
+        intent.putExtra(EXTRA_HOST, host);
 
         Log.i(TAG, "Going to Create Meeting Homepage");
         startActivity(intent);
