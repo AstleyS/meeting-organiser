@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class Meeting implements Serializable {
 
-    static int currID = 0;
+    public static int currID = 0;
 
     public int id;
 

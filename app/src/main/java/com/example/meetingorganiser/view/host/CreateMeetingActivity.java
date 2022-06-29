@@ -54,7 +54,11 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
     public void onClickCancel(View view) {
         Intent intent = new Intent(this, HostHomepageActivity.class);
-        Log.i(TAG, "Going to HostHomepageActivity");
+
+        intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
+        intent.putExtra(EXTRA_HOST, (Serializable) host);
+
+        Log.i(TAG, "onClickCancel. Going to HostHomepageActivity");
         startActivity(intent);
         finish();
     }
