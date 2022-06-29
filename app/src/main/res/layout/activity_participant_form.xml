@@ -131,7 +131,7 @@
             android:onClick="onClickCancel"
             android:backgroundTint="#FF0000"
             android:src="@drawable/ic_cancel"
-            android:tooltipText="Add meeting" />
+            android:tooltipText="Cancel" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_meeting"
@@ -141,7 +141,7 @@
             android:layout_margin="24dp"
             android:onClick="onClickCreateParticipant"
             android:src="@drawable/ic_check"
-            android:tooltipText="Add meeting" />
+            android:tooltipText="Confirm" />
     </LinearLayout>
 
 

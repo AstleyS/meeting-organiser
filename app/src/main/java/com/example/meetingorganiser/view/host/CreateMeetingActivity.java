@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.meetingorganiser.R;
 import com.example.meetingorganiser.data.entities.Host;
@@ -72,8 +73,9 @@ public class CreateMeetingActivity extends AppCompatActivity {
             meetingsList.add(meeting);
 
             intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
-            intent.putExtra(EXTRA_HOST, (Serializable) host);
+            intent.putExtra(EXTRA_HOST, host);
 
+            Toast.makeText(this, "Meeting \" " + meeting.title + "\" created!", Toast.LENGTH_SHORT).show();
             Log.i(TAG, "Going to HostHomepageActivity");
             startActivity(intent);
             finish();

@@ -62,6 +62,7 @@ public class HostHomepageActivity extends AppCompatActivity {
 
                 Log.i(TAG, "Going to Meeting Details");
                 startActivity(intent);
+                finish();
             }
         });
     }

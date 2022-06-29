@@ -102,7 +102,7 @@
             android:onClick="onClickCancel"
             android:backgroundTint="#FF0000"
             android:src="@drawable/ic_cancel"
-            android:tooltipText="Add meeting" />
+            android:tooltipText="Cancel" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_meeting"

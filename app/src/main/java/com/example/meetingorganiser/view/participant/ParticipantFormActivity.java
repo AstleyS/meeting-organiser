@@ -140,7 +140,7 @@ public class ParticipantFormActivity extends AppCompatActivity {
 
         if (signature.getDrawable() == null || signatureStr.length() == 0) {
             error = true;
-            Toast.makeText(this, "Signature required!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Signature required!", Toast.LENGTH_LONG).show();Toast.makeText(this, "Signature required!", Toast.LENGTH_LONG).show();
         }
 
         return !error;

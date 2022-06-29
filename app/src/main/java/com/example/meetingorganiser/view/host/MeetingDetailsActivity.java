@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.meetingorganiser.R;
 import com.example.meetingorganiser.data.entities.Host;
@@ -58,6 +59,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     public void onClickStartMeeting(View view) {
         Intent intent = new Intent(this, MeetingEventActivity.class);
 
+        Toast.makeText(this, "Meeting \" " + meeting.title + "\" is starting...", Toast.LENGTH_SHORT).show();
         Log.i(TAG, "onStart. Going to MeetingEventActivity");
         startActivity(intent);
 
@@ -79,6 +81,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
                 intent.putExtra(EXTRA_HOST, (Serializable) host);
 
                 System.out.println(meeting.title);
+                Toast.makeText(this, "Meeting \" " + meeting.title + "\" updated!", Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "onUpdate. Going to HostHomepageActivity");
                 startActivity(intent);
                 finish();
@@ -120,6 +123,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_HOST, host);
             intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
 
+            Toast.makeText(this, "Meeting \" " + meeting.title + "\" deleted!", Toast.LENGTH_SHORT).show();
             Log.i(TAG, "onDelete. Going to HostHomepageActivity");
             startActivity(intent);
             finish();
