@@ -24,8 +24,8 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     private final String EXTRA_MEETINGS_LIST = "meetingsList";
 
     private List<Meeting> meetingsList;
-    Meeting meeting;
-    Host host;
+    private Meeting meeting;
+    private Host host;
 
     EditText title, description, date, time;
     Button startButton, updateButton, deleteButton;
@@ -55,7 +55,13 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         time.setText(meeting.time);
     }
 
-    public void onClickStartMeeting(View view) {}
+    public void onClickStartMeeting(View view) {
+        Intent intent = new Intent(this, MeetingEventActivity.class);
+
+        Log.i(TAG, "onStart. Going to MeetingEventActivity");
+        startActivity(intent);
+
+    }
 
     public void onClickUpdate(View view) {
         if (updateButton.getText().toString().equals("Save Update")) {
