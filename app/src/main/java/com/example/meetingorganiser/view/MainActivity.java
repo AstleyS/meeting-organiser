@@ -29,13 +29,11 @@ public class MainActivity extends AppCompatActivity {
     public void onClickHost(View view) {
         startActivity(new Intent(this, HostFormActivity.class));
         Log.i(TAG, "Going to Host Form");
-        finish();
     }
 
     public void onClickParticipant(View view) {
         startActivity(new Intent(this, ParticipantFormActivity.class));
         Log.i(TAG, "Going to Participant Form");
-        finish();
     }
 
 }

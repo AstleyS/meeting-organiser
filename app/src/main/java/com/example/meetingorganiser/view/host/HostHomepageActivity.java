@@ -36,7 +36,6 @@ public class HostHomepageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host_homepage);
 
-
         meetingsList = (List<Meeting>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
         if (meetingsList == null) meetingsList = new ArrayList<>();
 

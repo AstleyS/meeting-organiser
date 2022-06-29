@@ -32,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:hint="First name here!"
-                android:text="Astley"
                 android:maxLength="25"/>
 
         </LinearLayout>
@@ -48,7 +47,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:hint="Last name here!"
-                android:text="Santos"
                 android:maxLength="25"/>
 
         </LinearLayout>
@@ -78,7 +76,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:hint="e.g +352 611111111"
-                android:text="+352 611111111"
                 android:maxLength="20"/>
 
         </LinearLayout>
@@ -94,7 +91,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:hint="e.g a@gmail.com"
-                android:text="a@gmail.com"
                 android:maxLength="25"/>
 
         </LinearLayout>
