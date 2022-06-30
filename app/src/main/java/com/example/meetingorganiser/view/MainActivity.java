@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.data.room.MeetOrganiserDB;
 import com.example.meetingorganiser.view.host.HostFormActivity;
 import com.example.meetingorganiser.view.host.HostHomepageActivity;
 import com.example.meetingorganiser.view.participant.ParticipantFormActivity;

@@ -1,5 +1,6 @@
 package com.example.meetingorganiser.data.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,8 +9,9 @@ import java.io.Serializable;
 @Entity
 public class Host implements Serializable {
 
+    @NonNull
     @PrimaryKey
-    public int id;
+    public String id;
 
     public String firstName;
 
@@ -19,9 +21,8 @@ public class Host implements Serializable {
 
     public String email;
 
-
     public Host(String firstName, String lastName, String phoneNumber, String email) {
-        id = 1;
+        this.id = (firstName + lastName).toLowerCase();
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;

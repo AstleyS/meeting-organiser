@@ -24,5 +24,5 @@ public interface MeetingDAO {
     void delete(Meeting meeting);
 
     @Query("SELECT * FROM meeting WHERE hostID=:hostID")
-    List<Meeting> getMeetingsOfHost(int hostID);
+    List<Meeting> getMeetingsOfHost(String hostID);
 }

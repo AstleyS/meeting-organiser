@@ -1,5 +1,6 @@
 package com.example.meetingorganiser.data.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -13,12 +14,11 @@ import java.io.Serializable;
         onDelete =  ForeignKey.CASCADE))
 public class Meeting implements Serializable {
 
-    public static int currID = 0;
-
+    @NonNull
     @PrimaryKey
-    public int id;
+    public String id;
 
-    public int hostID;
+    public String hostID;
 
     public String title;
 
@@ -40,16 +40,14 @@ public class Meeting implements Serializable {
     public String typeFeedback;
      */
 
-    public Meeting(int hostID, String title, String description, String date, String time) {
-        id = ++currID;
+    public Meeting(String hostID, String title, String description, String date, String time) {
+        this.id = (hostID + ":" + title + ":" + date + ":" + time).toLowerCase();
         this.hostID = hostID;
         this.title = title;
         this.description = description;
         this.date = date;
         this.time = time;
         available = 1;
-        qrCode = "M" + id;
-
     }
 
 }

@@ -28,5 +28,5 @@ public interface HostDAO {
     List<Host> getHosts();
 
     @Query("SELECT * FROM host WHERE id=:id")
-    Host getHost(final int id);
+    Host getHost(final String id);
 }

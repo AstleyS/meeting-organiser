@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.controller.HostController;
 import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.data.entities.Meeting;
 
@@ -20,6 +21,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class HostHomepageActivity extends AppCompatActivity {
+
+    HostController controller;
 
     private final String TAG = "HostHomepageActivity";
     private final String EXTRA_MEETINGS_LIST = "meetingsList";
@@ -35,11 +38,12 @@ public class HostHomepageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host_homepage);
 
-        meetingsList = (List<Meeting>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
-        if (meetingsList == null) meetingsList = new ArrayList<>();
-
         host = (Host) getIntent().getSerializableExtra(EXTRA_HOST);
         this.setTitle(host.firstName + "'s Homepage");
+
+        controller = new HostController(getApplicationContext());
+        meetingsList = controller.getMeetingsOfHost(host.id);
+        if (meetingsList == null) meetingsList = new ArrayList<>();
 
         // System.out.println("oncreate list: " + meetingsList);
         // System.out.println("oncreate host: " + host);
@@ -55,7 +59,6 @@ public class HostHomepageActivity extends AppCompatActivity {
                 Meeting meeting = adapter.getItem(i);
                 Intent intent = new Intent(context, MeetingDetailsActivity.class);
 
-                intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
                 intent.putExtra(EXTRA_MEETING, meeting);
                 intent.putExtra(EXTRA_HOST, host);
 
@@ -70,7 +73,6 @@ public class HostHomepageActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateMeetingActivity.class);
 
         // System.out.println(meetingsList);
-        intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
         intent.putExtra(EXTRA_HOST, host);
 
         Log.i(TAG, "Going to Create Meeting Homepage");

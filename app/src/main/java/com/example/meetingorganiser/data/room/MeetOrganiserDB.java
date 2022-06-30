@@ -13,17 +13,19 @@ import com.example.meetingorganiser.data.room.dao.HostDAO;
 import com.example.meetingorganiser.data.room.dao.MeetingDAO;
 
 
-@Database(entities = { Host.class, Meeting.class, Participant.class}, version = 1)
+@Database(entities = { Host.class, Meeting.class, Participant.class}, version = 2)
 public abstract class MeetOrganiserDB extends RoomDatabase {
 
     public abstract HostDAO getHostDao();
-    public abstract MeetingDAO getMeetingsOfHostDAO();
+    public abstract MeetingDAO getMeetingDAO();
 
     private static MeetOrganiserDB INSTANCE;
     public static MeetOrganiserDB getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(), MeetOrganiserDB.class, "meeting_organiser_db")
-                    .allowMainThreadQueries().build();
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return INSTANCE;
     }

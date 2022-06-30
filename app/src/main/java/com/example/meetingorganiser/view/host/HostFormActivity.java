@@ -21,6 +21,7 @@ import java.io.Serializable;
 public class HostFormActivity extends AppCompatActivity {
 
     HostController controller;
+
     private final String TAG = "HostFormActivity";
     private final String EXTRA_HOST = "host";
     private final String PREFERENCES_NAME = "host.dataStorageForm";
@@ -59,7 +60,6 @@ public class HostFormActivity extends AppCompatActivity {
         if (email_sp != null) email.setText(email_sp);
 
         controller = new HostController(getApplicationContext());
-
     }
 
     public void onClickCancel(View view) {
@@ -76,7 +76,8 @@ public class HostFormActivity extends AppCompatActivity {
             Host host = new Host(fname.getText().toString().trim(), lname.getText().toString().trim(),
                                 phone.getText().toString().trim(), email.getText().toString().trim());
 
-            controller.insertHost(host);
+            Host hostDB = controller.getHost(host);
+            if (hostDB == null) controller.insertHost(host);
 
             SharedPreferences.Editor editor = sp.edit();
             editor.putString(FNAME_KEY, fname.getText().toString().trim());
@@ -95,22 +96,22 @@ public class HostFormActivity extends AppCompatActivity {
     private boolean validFields() {
         boolean error = false;
 
-        if (!fname.getText().toString().matches("[-\\sA-Za-z]+$")) {
+        if (!fname.getText().toString().trim().matches("[-\\sA-Za-z]+$")) {
             fname.setError("This field required or not correctly filled");
             error = true;
         }
 
-        if (!lname.getText().toString().matches("[-\\sA-Za-z]+$")) {
+        if (!lname.getText().toString().trim().matches("[-\\sA-Za-z]+$")) {
             lname.setError("This field required or not correctly filled");
             error = true;
         }
 
-        if (!phone.getText().toString().matches("^[+][(]?[0-9]{1,4}[)]?[-\\s\\./0-9]*$")) {
+        if (!phone.getText().toString().trim().matches("^[+][(]?[0-9]{1,4}[)]?[-\\s\\./0-9]*$")) {
             phone.setError("This field required or not correctly filled");
             error = true;
         }
 
-        if (!email.getText().toString().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+        if (!email.getText().toString().trim().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             email.setError("This field required or not correctly filled");
             error = true;
         }

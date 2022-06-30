@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.controller.MeetingController;
 import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.data.entities.Meeting;
 
@@ -18,6 +19,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class MeetingDetailsActivity extends AppCompatActivity {
+
+    MeetingController controller;
 
     private final String TAG = "MeetingDetailsActivity";
     private final String EXTRA_HOST = "host";
@@ -54,13 +57,17 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         description.setText(meeting.description);
         date.setText(meeting.date);
         time.setText(meeting.time);
+
+        controller = new MeetingController(getApplicationContext());
     }
 
     public void onClickStartMeeting(View view) {
         Intent intent = new Intent(this, MeetingEventActivity.class);
 
         meeting.available = 0;
-        meetingsList.removeIf(m -> m.id == meeting.id);
+        controller.updateMeeting(meeting);
+
+        meetingsList.removeIf(m -> m.id.equals(meeting.id));
         meetingsList.add(meeting);
 
         intent.putExtra(EXTRA_MEETING, meeting);
@@ -84,7 +91,9 @@ public class MeetingDetailsActivity extends AppCompatActivity {
                 meeting.date = date.getText().toString().trim();
                 meeting.time = time.getText().toString().trim();
 
-                meetingsList.removeIf(m -> m.id == meeting.id);
+                controller.updateMeeting(meeting);
+
+                meetingsList.removeIf(m -> m.id.equals(meeting.id));
                 meetingsList.add(meeting);
                 intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
                 intent.putExtra(EXTRA_HOST, (Serializable) host);
@@ -125,8 +134,9 @@ public class MeetingDetailsActivity extends AppCompatActivity {
             time.setEnabled(false);
 
         } else {
-            meetingsList.removeIf(m -> m.id == meeting.id);
-            Meeting.currID--;
+            controller.deleteMeeting(meeting);
+
+            meetingsList.removeIf(m -> m.id.equals(meeting.id));
 
             Intent intent = new Intent(this, HostHomepageActivity.class);
             intent.putExtra(EXTRA_HOST, host);

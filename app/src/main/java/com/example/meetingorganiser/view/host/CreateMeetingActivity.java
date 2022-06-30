@@ -15,16 +15,18 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.controller.MeetingController;
 import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.data.entities.Meeting;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 
 public class CreateMeetingActivity extends AppCompatActivity {
+
+    MeetingController controller;
 
     private final String TAG = "CreateMeetingActivity";
     private final String EXTRA_MEETINGS_LIST = "meetingsList";
@@ -46,18 +48,17 @@ public class CreateMeetingActivity extends AppCompatActivity {
         date = (EditText) findViewById(R.id.meeting_date);
         time = (EditText) findViewById(R.id.meeting_time);
 
-        meetingsList = (List<Meeting>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
-        host = (Host) getIntent().getSerializableExtra(EXTRA_HOST);
 
         //System.out.println("List" + meetingsList);
         this.setTitle("Create Meeting");
+
+        controller = new MeetingController(getApplicationContext());
+        host = (Host) getIntent().getSerializableExtra(EXTRA_HOST);
     }
 
     public void onClickCancel(View view) {
         Intent intent = new Intent(this, HostHomepageActivity.class);
-
-        intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
-        intent.putExtra(EXTRA_HOST, (Serializable) host);
+        intent.putExtra(EXTRA_HOST, host);
 
         Log.i(TAG, "onClickCancel. Going to HostHomepageActivity");
         startActivity(intent);
@@ -70,15 +71,20 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
             Meeting meeting = new Meeting(host.id, title.getText().toString().trim(),
                                         description.getText().toString().trim(), date.getText().toString().trim(), time.getText().toString().trim());
-            meetingsList.add(meeting);
 
-            intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
-            intent.putExtra(EXTRA_HOST, host);
+            if (meetingsList == null || meetingsList.stream().noneMatch(m -> m.id.equals(meeting.id))) {
+                controller.insertMeeting(meeting);
 
-            Toast.makeText(this, "Meeting \" " + meeting.title + "\" created!", Toast.LENGTH_SHORT).show();
-            Log.i(TAG, "Going to HostHomepageActivity");
-            startActivity(intent);
-            finish();
+                intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
+                intent.putExtra(EXTRA_HOST, host);
+
+                Toast.makeText(this, "Meeting \" " + meeting.title + "\" created!", Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "Going to HostHomepageActivity");
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "A Meeting with the same values already exists!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
