@@ -58,17 +58,16 @@ public class MeetingEventActivity extends AppCompatActivity {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
                 long time = SystemClock.elapsedRealtime() - chronometer.getBase();
-                int h   = (int)(time /3600000);
-                int m = (int)(time - h*3600000)/60000;
-                int s= (int)(time - h*3600000- m*60000)/1000 ;
-                String t = (h < 10 ? "0"+h: h)+":"+(m < 10 ? "0"+m: m)+":"+ (s < 10 ? "0"+s: s);
+                int h = (int) (time /3600000);
+                int m = (int) (time - h*3600000)/60000;
+                int s = (int) (time - h*3600000- m*60000)/1000 ;
+                String t = (h < 10 ? "0"+ h: h)+ ":" +  (m < 10 ? "0"+ m: m) + ":" + (s < 10 ? "0" + s: s);
                 chronometer.setText(t);
             }
         });
          timer.setBase(SystemClock.elapsedRealtime());
          timer.setText("00:00:00");
-
-        timer.start();
+         timer.start();
 
         nrParticipant.setText(nrParticipant.getText().toString() + " 0");
 
@@ -82,4 +81,6 @@ public class MeetingEventActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    public void onClickDownloadMParticipants(View view) { }
 }

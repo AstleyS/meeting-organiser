@@ -1,7 +1,16 @@
 package com.example.meetingorganiser.data.entities;
 
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
+// An host has N Meetings
+@Entity(foreignKeys = @ForeignKey(entity = Host.class,
+        parentColumns = "id",
+        childColumns = "hostID",
+        onDelete =  ForeignKey.CASCADE))
 public class Meeting implements Serializable {
 
     public static int currID = 0;
@@ -38,6 +47,7 @@ public class Meeting implements Serializable {
         this.date = date;
         this.time = time;
         available = 1;
+        qrCode = "M" + id;
 
     }
 
