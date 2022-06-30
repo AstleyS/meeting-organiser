@@ -22,12 +22,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.controller.ParticipantController;
 import com.example.meetingorganiser.data.entities.Participant;
 import com.example.meetingorganiser.view.MainActivity;
 
 import java.io.ByteArrayOutputStream;
 
 public class ParticipantFormActivity extends AppCompatActivity {
+
+    ParticipantController controller;
 
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQ_CODE = 102;

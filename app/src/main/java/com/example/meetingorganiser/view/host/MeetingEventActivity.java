@@ -14,18 +14,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.controller.ParticipantController;
 import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.data.entities.Meeting;
+import com.example.meetingorganiser.data.entities.Participant;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class MeetingEventActivity extends AppCompatActivity {
 
+    ParticipantController controller;
+
     private final String TAG = "MeetingEventActivity";
     private final String EXTRA_MEETING = "meeting";
     private final String EXTRA_HOST = "host";
-    private final String EXTRA_MEETINGS_LIST = "meetingsList";
 
     private List<Meeting> meetingsList;
     private Meeting meeting;
@@ -44,7 +47,6 @@ public class MeetingEventActivity extends AppCompatActivity {
 
         meeting = (Meeting) getIntent().getSerializableExtra(EXTRA_MEETING);
         host = (Host) getIntent().getSerializableExtra(EXTRA_HOST);
-        meetingsList = (List<Meeting>) getIntent().getSerializableExtra(EXTRA_MEETINGS_LIST);
 
         timer = (Chronometer) findViewById(R.id.timer);
         stopMeeting = (Button) findViewById(R.id.stop_button);
@@ -58,9 +60,9 @@ public class MeetingEventActivity extends AppCompatActivity {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
                 long time = SystemClock.elapsedRealtime() - chronometer.getBase();
-                int h = (int) (time /3600000);
-                int m = (int) (time - h*3600000)/60000;
-                int s = (int) (time - h*3600000- m*60000)/1000 ;
+                int h = (int) (time / 3600000);
+                int m = (int) (time - h * 3600000) / 60000;
+                int s = (int) (time - h * 3600000 - m * 60000) / 1000 ;
                 String t = (h < 10 ? "0"+ h: h)+ ":" +  (m < 10 ? "0"+ m: m) + ":" + (s < 10 ? "0" + s: s);
                 chronometer.setText(t);
             }
@@ -69,14 +71,14 @@ public class MeetingEventActivity extends AppCompatActivity {
          timer.setText("00:00:00");
          timer.start();
 
-        nrParticipant.setText(nrParticipant.getText().toString() + " 0");
-
+         controller = new ParticipantController(getApplicationContext());
+         List<Participant> participants = controller.getParticipantsOfMeeting(meeting);
+         nrParticipant.setText(nrParticipant.getText().toString() + " " + (participants == null ? 0 : participants.size()));
     }
 
     public void onClickStopMeeting(View view) {
         Intent intent = new Intent(this, HostHomepageActivity.class);
 
-        intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
         intent.putExtra(EXTRA_HOST, host);
         startActivity(intent);
         finish();

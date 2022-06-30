@@ -1,15 +1,21 @@
 package com.example.meetingorganiser.data.entities;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity
+@Entity(foreignKeys = @ForeignKey(entity = Host.class,
+        parentColumns = "id",
+        childColumns = "meetingID",
+        onDelete =  ForeignKey.CASCADE))
 public class Participant implements Serializable {
 
     @PrimaryKey
     public int id;
+
+    public int meetingID;
 
     public String firstName;
 

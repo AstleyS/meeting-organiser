@@ -11,13 +11,15 @@ import com.example.meetingorganiser.data.entities.Meeting;
 import com.example.meetingorganiser.data.entities.Participant;
 import com.example.meetingorganiser.data.room.dao.HostDAO;
 import com.example.meetingorganiser.data.room.dao.MeetingDAO;
+import com.example.meetingorganiser.data.room.dao.ParticipantDAO;
 
 
-@Database(entities = { Host.class, Meeting.class, Participant.class}, version = 2)
+@Database(entities = { Host.class, Meeting.class, Participant.class}, version = 3)
 public abstract class MeetOrganiserDB extends RoomDatabase {
 
     public abstract HostDAO getHostDao();
     public abstract MeetingDAO getMeetingDAO();
+    public abstract ParticipantDAO getParticipantDAO();
 
     private static MeetOrganiserDB INSTANCE;
     public static MeetOrganiserDB getInstance(Context context) {
