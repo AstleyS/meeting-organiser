@@ -1,6 +1,8 @@
 package com.example.meetingorganiser.view.host;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,16 +11,19 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.meetingorganiser.R;
+import com.example.meetingorganiser.controller.HostController;
 import com.example.meetingorganiser.data.entities.Host;
+import com.example.meetingorganiser.data.room.dao.HostDAO;
 import com.example.meetingorganiser.view.MainActivity;
 
 import java.io.Serializable;
 
 public class HostFormActivity extends AppCompatActivity {
 
+    HostController controller;
     private final String TAG = "HostFormActivity";
     private final String EXTRA_HOST = "host";
-    private final String PREFERENCES_NAME = "participant.dataStorageForm";
+    private final String PREFERENCES_NAME = "host.dataStorageForm";
     private SharedPreferences sp;
 
     private final String FNAME_KEY = "h_fname";
@@ -53,6 +58,8 @@ public class HostFormActivity extends AppCompatActivity {
         if (phone_sp != null) phone.setText(phone_sp);
         if (email_sp != null) email.setText(email_sp);
 
+        controller = new HostController(getApplicationContext());
+
     }
 
     public void onClickCancel(View view) {
@@ -69,6 +76,8 @@ public class HostFormActivity extends AppCompatActivity {
             Host host = new Host(fname.getText().toString().trim(), lname.getText().toString().trim(),
                                 phone.getText().toString().trim(), email.getText().toString().trim());
 
+            controller.insertHost(host);
+
             SharedPreferences.Editor editor = sp.edit();
             editor.putString(FNAME_KEY, fname.getText().toString().trim());
             editor.putString(LNAME_KEY, lname.getText().toString().trim());
@@ -76,7 +85,7 @@ public class HostFormActivity extends AppCompatActivity {
             editor.putString(EMAIL_KEY, email.getText().toString().trim());
             editor.apply();
 
-            intent.putExtra(EXTRA_HOST, (Serializable) host);
+            intent.putExtra(EXTRA_HOST, host);
             startActivity(intent);
             Log.i(TAG, "Going to HostHomepageActivity");
             finish();
@@ -86,12 +95,12 @@ public class HostFormActivity extends AppCompatActivity {
     private boolean validFields() {
         boolean error = false;
 
-        if (!fname.getText().toString().matches("[A-Za-z]+$")) {
+        if (!fname.getText().toString().matches("[-\\sA-Za-z]+$")) {
             fname.setError("This field required or not correctly filled");
             error = true;
         }
 
-        if (!lname.getText().toString().matches("[A-Za-z]+$")) {
+        if (!lname.getText().toString().matches("[-\\sA-Za-z]+$")) {
             lname.setError("This field required or not correctly filled");
             error = true;
         }

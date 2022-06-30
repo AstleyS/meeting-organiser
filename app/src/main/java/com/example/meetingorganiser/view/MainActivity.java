@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         this.setTitle("Meeting Organiser");
     }
 
-
     public void onClickHost(View view) {
         startActivity(new Intent(this, HostFormActivity.class));
         Log.i(TAG, "Going to Host Form");

@@ -118,12 +118,12 @@ public class ParticipantFormActivity extends AppCompatActivity {
     private boolean validFields() {
         boolean error = false;
 
-        if (!fname.getText().toString().matches("[A-Za-z]+$")) {
+        if (!fname.getText().toString().matches("[-\\sA-Za-z]+$")) {
             fname.setError("This field required or not correctly filled");
             error = true;
         }
 
-        if (!lname.getText().toString().matches("[A-Za-z]+$")) {
+        if (!lname.getText().toString().matches("[-\\sA-Za-z]+$")) {
             lname.setError("This field required or not correctly filled");
             error = true;
         }

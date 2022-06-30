@@ -15,6 +15,7 @@ public class Meeting implements Serializable {
 
     public static int currID = 0;
 
+    @PrimaryKey
     public int id;
 
     public int hostID;

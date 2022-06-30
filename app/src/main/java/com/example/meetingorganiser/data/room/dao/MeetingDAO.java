@@ -23,9 +23,6 @@ public interface MeetingDAO {
     @Delete
     void delete(Meeting meeting);
 
-    @Query("SELECT * FROM meeting")
-    List<Meeting> getMeetings();
-
     @Query("SELECT * FROM meeting WHERE hostID=:hostID")
     List<Meeting> getMeetingsOfHost(int hostID);
 }
