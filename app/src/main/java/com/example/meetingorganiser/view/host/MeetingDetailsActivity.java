@@ -59,9 +59,18 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     public void onClickStartMeeting(View view) {
         Intent intent = new Intent(this, MeetingEventActivity.class);
 
+        meeting.available = 0;
+        meetingsList.removeIf(m -> m.id == meeting.id);
+        meetingsList.add(meeting);
+
+        intent.putExtra(EXTRA_MEETING, meeting);
+        intent.putExtra(EXTRA_HOST, host);
+        intent.putExtra(EXTRA_MEETINGS_LIST, (Serializable) meetingsList);
+
         Toast.makeText(this, "Meeting \" " + meeting.title + "\" is starting...", Toast.LENGTH_SHORT).show();
         Log.i(TAG, "onStart. Going to MeetingEventActivity");
         startActivity(intent);
+        finish();
 
     }
 

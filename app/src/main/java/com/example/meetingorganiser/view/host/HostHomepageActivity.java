@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.meetingorganiser.R;
@@ -17,8 +16,8 @@ import com.example.meetingorganiser.data.entities.Meeting;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HostHomepageActivity extends AppCompatActivity {
 
@@ -45,7 +44,7 @@ public class HostHomepageActivity extends AppCompatActivity {
         // System.out.println("oncreate list: " + meetingsList);
         // System.out.println("oncreate host: " + host);
 
-        MeetingAdapter adapter = new MeetingAdapter(this, R.layout.list_item, meetingsList);
+        MeetingAdapter adapter = new MeetingAdapter(this, R.layout.list_item_meeting, meetingsList.stream().filter(m -> m.available == 1).collect(Collectors.toList()));
         ListView listView = (ListView) findViewById(R.id.list_meetings);
         listView.setAdapter(adapter);
 

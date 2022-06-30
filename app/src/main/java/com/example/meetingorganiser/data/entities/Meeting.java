@@ -1,7 +1,6 @@
 package com.example.meetingorganiser.data.entities;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 public class Meeting implements Serializable {
 
@@ -18,6 +17,8 @@ public class Meeting implements Serializable {
     public String date;
 
     public String time;
+
+    public int available;
 
     public String qrCode;
 
@@ -36,6 +37,7 @@ public class Meeting implements Serializable {
         this.description = description;
         this.date = date;
         this.time = time;
+        available = 1;
 
     }
 
