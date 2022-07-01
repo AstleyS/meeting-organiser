@@ -28,6 +28,7 @@ public class ParticipantHomepageActivity extends AppCompatActivity {
     private final String TAG = "ParticipantHomepageActivity";
     private final String EXTRA_MEETING = "meeting";
     private final String EXTRA_PARTICIPANT = "participant";
+    private final String EXTRA_IS_PARTICIPANT = "isParticipant";
 
     Participant participant;
     Meeting meeting;
@@ -66,7 +67,8 @@ public class ParticipantHomepageActivity extends AppCompatActivity {
                 meeting = mController.getMeeting(participant.meetingID);
                 pController.updateParticipant(participant);
 
-                intent.putExtra(EXTRA_PARTICIPANT, 1);
+                intent.putExtra(EXTRA_PARTICIPANT, participant);
+                intent.putExtra(EXTRA_IS_PARTICIPANT, 1);
                 intent.putExtra(EXTRA_MEETING, meeting);
 
                 startActivity(intent);

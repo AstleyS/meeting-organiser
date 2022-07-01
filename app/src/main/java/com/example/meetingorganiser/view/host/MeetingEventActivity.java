@@ -31,9 +31,12 @@ public class MeetingEventActivity extends AppCompatActivity {
     private final String EXTRA_MEETING = "meeting";
     private final String EXTRA_HOST = "host";
     private final String EXTRA_PARTICIPANT = "participant";
+    private final String EXTRA_IS_PARTICIPANT = "isParticipant";
+
 
     private Meeting meeting;
     private Host host;
+    private Participant participant;
     private int isParticipant;
 
     Chronometer timer;
@@ -47,9 +50,10 @@ public class MeetingEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_event);
 
-        isParticipant = getIntent().getIntExtra(EXTRA_PARTICIPANT, 0);
-        meeting = (Meeting) getIntent().getSerializableExtra(EXTRA_MEETING);
+        isParticipant = getIntent().getIntExtra(EXTRA_IS_PARTICIPANT, 0);
         host = (Host) getIntent().getSerializableExtra(EXTRA_HOST);
+        meeting = (Meeting) getIntent().getSerializableExtra(EXTRA_MEETING);
+        participant = (Participant) getIntent().getSerializableExtra(EXTRA_PARTICIPANT);
 
         timer = (Chronometer) findViewById(R.id.timer);
         stopMeeting = (Button) findViewById(R.id.stop_button);
@@ -85,6 +89,7 @@ public class MeetingEventActivity extends AppCompatActivity {
 
         if (isParticipant == 1) {
             intent = new Intent(this, ParticipantHomepageActivity.class);
+            intent.putExtra(EXTRA_PARTICIPANT, participant);
         } else {
             intent = new Intent(this, HostHomepageActivity.class);
             intent.putExtra(EXTRA_HOST, host);
