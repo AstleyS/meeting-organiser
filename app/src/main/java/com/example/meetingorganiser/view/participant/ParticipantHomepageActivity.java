@@ -61,7 +61,7 @@ public class ParticipantHomepageActivity extends AppCompatActivity {
         if (meetings != null && meetings.size() != 0) {
             Intent intent = new Intent(this, MeetingEventActivity.class);
 
-            if (meetings.stream().anyMatch(m -> m.id.equals(insertedMeetingID.getText().toString().trim()))) {
+            if (meetings.stream().anyMatch(m -> m.id.equals(insertedMeetingID.getText().toString().trim()) && m.available == 1)) {
                 participant.meetingID = insertedMeetingID.getText().toString().trim();
 
                 meeting = mController.getMeeting(participant.meetingID);
