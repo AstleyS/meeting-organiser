@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.meetingorganiser.R;
 import com.example.meetingorganiser.controller.ParticipantController;
+import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.data.entities.Participant;
 import com.example.meetingorganiser.view.MainActivity;
 
@@ -34,6 +35,7 @@ public class ParticipantFormActivity extends AppCompatActivity {
 
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQ_CODE = 102;
+
     private final String TAG = "ParticipantFormActivity";
     private final String EXTRA_PARTICIPANT = "participant";
     private final String PREFERENCES_NAME = "participant.dataStorageForm";
@@ -82,6 +84,7 @@ public class ParticipantFormActivity extends AppCompatActivity {
             signature.setImageBitmap(image);
         }
 
+        controller = new ParticipantController(getApplicationContext());
     }
 
     public void onClickAddSignature(View view) {
@@ -102,6 +105,9 @@ public class ParticipantFormActivity extends AppCompatActivity {
 
             Participant participant = new Participant(fname.getText().toString().trim(), lname.getText().toString().trim(),
                     phone.getText().toString().trim(), email.getText().toString().trim(), signatureStr);
+
+            Participant participantDB = controller.getParticipant(participant);
+            if (participantDB == null) controller.insertParticipant(participant);
 
             SharedPreferences.Editor editor = sp.edit();
             editor.putString(FNAME_KEY, fname.getText().toString().trim());

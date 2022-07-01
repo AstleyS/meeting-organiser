@@ -2,6 +2,7 @@ package com.example.meetingorganiser.controller;
 
 import android.content.Context;
 
+import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.data.entities.Meeting;
 import com.example.meetingorganiser.data.entities.Participant;
 import com.example.meetingorganiser.data.room.MeetOrganiserDB;
@@ -31,6 +32,10 @@ public class ParticipantController {
 
     public void deleteParticipant(Participant participant) {
         participantDAO.delete(participant);
+    }
+
+    public Participant getParticipant(Participant participant) {
+        return participantDAO.getParticipant(participant.id);
     }
 
     public List<Participant> getParticipantsOfMeeting(Meeting meeting) {

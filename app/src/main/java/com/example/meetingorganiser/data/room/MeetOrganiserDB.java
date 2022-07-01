@@ -14,7 +14,7 @@ import com.example.meetingorganiser.data.room.dao.MeetingDAO;
 import com.example.meetingorganiser.data.room.dao.ParticipantDAO;
 
 
-@Database(entities = { Host.class, Meeting.class, Participant.class}, version = 3)
+@Database(entities = { Host.class, Meeting.class, Participant.class}, version = 6)
 public abstract class MeetOrganiserDB extends RoomDatabase {
 
     public abstract HostDAO getHostDao();

@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.data.entities.Meeting;
 import com.example.meetingorganiser.data.entities.Participant;
 
@@ -22,6 +23,9 @@ public interface ParticipantDAO {
 
     @Delete
     void delete(Participant participant);
+
+    @Query("SELECT * FROM participant WHERE id=:id")
+    Participant getParticipant(final String id);
 
     @Query("SELECT * FROM participant WHERE meetingID=:meetingID")
     List<Participant> getParticipantsOfMeeting(String meetingID);

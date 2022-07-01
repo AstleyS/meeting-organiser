@@ -18,6 +18,7 @@ import com.example.meetingorganiser.controller.ParticipantController;
 import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.data.entities.Meeting;
 import com.example.meetingorganiser.data.entities.Participant;
+import com.example.meetingorganiser.view.participant.ParticipantHomepageActivity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,10 +30,11 @@ public class MeetingEventActivity extends AppCompatActivity {
     private final String TAG = "MeetingEventActivity";
     private final String EXTRA_MEETING = "meeting";
     private final String EXTRA_HOST = "host";
+    private final String EXTRA_PARTICIPANT = "participant";
 
-    private List<Meeting> meetingsList;
     private Meeting meeting;
-    private Host host ;
+    private Host host;
+    private int isParticipant;
 
     Chronometer timer;
     Button stopMeeting;
@@ -45,6 +47,7 @@ public class MeetingEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_event);
 
+        isParticipant = getIntent().getIntExtra(EXTRA_PARTICIPANT, 0);
         meeting = (Meeting) getIntent().getSerializableExtra(EXTRA_MEETING);
         host = (Host) getIntent().getSerializableExtra(EXTRA_HOST);
 
@@ -73,13 +76,20 @@ public class MeetingEventActivity extends AppCompatActivity {
 
          controller = new ParticipantController(getApplicationContext());
          List<Participant> participants = controller.getParticipantsOfMeeting(meeting);
+
          nrParticipant.setText(nrParticipant.getText().toString() + " " + (participants == null ? 0 : participants.size()));
     }
 
     public void onClickStopMeeting(View view) {
-        Intent intent = new Intent(this, HostHomepageActivity.class);
+        Intent intent;
 
-        intent.putExtra(EXTRA_HOST, host);
+        if (isParticipant == 1) {
+            intent = new Intent(this, ParticipantHomepageActivity.class);
+        } else {
+            intent = new Intent(this, HostHomepageActivity.class);
+            intent.putExtra(EXTRA_HOST, host);
+        }
+
         startActivity(intent);
         finish();
     }

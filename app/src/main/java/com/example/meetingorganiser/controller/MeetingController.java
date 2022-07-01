@@ -26,16 +26,16 @@ public class MeetingController {
         meetingDAO.insert(meeting);
     }
 
-    public void updateMeeting(Meeting meeting) {
-        meetingDAO.update(meeting);
-    }
+    public void updateMeeting(Meeting meeting) { meetingDAO.update(meeting); }
 
     public void deleteMeeting(Meeting meeting) {
         meetingDAO.delete(meeting);
     }
 
-    public List<Meeting> getMeetingsOfHost(Host host) {
-        return meetingDAO.getMeetingsOfHost(host.id);
-    }
+    public Meeting getMeeting(String meeting) { return meetingDAO.getMeeting(meeting); }
+
+    public List<Meeting> getMeetings() { return meetingDAO.getMeetings(); }
+
+    public List<Meeting> getMeetingsOfHost(Host host) { return meetingDAO.getMeetingsOfHost(host.id); }
 
 }
