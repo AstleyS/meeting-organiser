@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +17,9 @@ import com.example.meetingorganiser.controller.ParticipantController;
 import com.example.meetingorganiser.data.entities.Host;
 import com.example.meetingorganiser.data.entities.Meeting;
 import com.example.meetingorganiser.data.entities.Participant;
+import com.example.meetingorganiser.view.participant.ParticipantAdapter;
 import com.example.meetingorganiser.view.participant.ParticipantHomepageActivity;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class MeetingEventActivity extends AppCompatActivity {
@@ -82,6 +81,9 @@ public class MeetingEventActivity extends AppCompatActivity {
          List<Participant> participants = controller.getParticipantsOfMeeting(meeting);
 
          nrParticipant.setText(nrParticipant.getText().toString() + " " + (participants == null ? 0 : participants.size()));
+
+        ParticipantAdapter adapter = new ParticipantAdapter(this, R.layout.list_item_participants, participants);
+        listView.setAdapter(adapter);
     }
 
     public void onClickStopMeeting(View view) {
